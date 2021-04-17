@@ -103,7 +103,7 @@ public:
 			inc_capacity();
 		}
 
-		new (m_buffer + m_size) T(std::move(args)...);
+		new (m_buffer + m_size) T(std::forward<T>(args)...);
 		++m_size;
 	}
 
