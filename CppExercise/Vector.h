@@ -310,7 +310,27 @@ public:
 		++m_size;
 	}
 
-	void insert(Iterator begin, size_t count, T& val);
+	void insert(Iterator pos, size_t count, const T& val)
+	{
+		auto i = m_size;
+
+		if (m_size + count >= m_capacity) {
+			auto iter_pos = pos - begin();
+			inc_capacity(m_capacity + count + 2);
+			pos = begin() + iter_pos;
+		}
+
+		for (auto it = end(); it != pos; it--) {
+			m_buffer[i + count - 1] = m_buffer[i - 1];
+			--i;
+		}
+
+		for (size_t i = 0; i < count; ++i) {
+			*pos = val;
+			m_size++;
+			pos++;
+		}
+	}
 
 	void insert(Iterator begin, Iterator end, T* arr);
 
