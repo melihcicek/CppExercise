@@ -106,7 +106,11 @@ public:
 		new (m_buffer + m_size) T(std::forward<T>(args)...);
 		++m_size;
 	}
-
+	void push_back(T&& val)
+	{
+		emplace_back(std::move(val));
+	}
+	
 	T& front() const
 	{
 		return m_buffer[0];
