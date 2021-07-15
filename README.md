@@ -25,4 +25,30 @@ struct jpegimage : image {
         cout << "view jpg\n";
     }
 };
+
+int main()
+{
+    mc::general_factory<image> img_fac;
+
+    img_fac.register_new_type<bmpimage>("bmp", "manzara"s);
+    img_fac.register_new_type<jpegimage>("jpg");
+
+    auto bimg = img_fac.get_instance("bmp");
+    bimg.get()->print_img();
+
+    auto jimg = img_fac.get_instance("jpg");
+    jimg.get()->print_img();
+
+    try
+    {
+        auto xx = img_fac.get_instance("xxx");
+    }
+    catch (const std::exception& ex)
+    {
+        cout << ex.what();
+    }
+
+}
+
 ```
+
