@@ -2,6 +2,7 @@
 
 #include <map>
 #include <memory>
+#include <functional>
 
 namespace mc {
     template<typename T>
